@@ -1,4 +1,4 @@
-package edu.northeastern.week4.project1;
+package edu.northeastern.project1;
 
 /** Example of using unit tests for this assignment.  To run them on the command line, make
  * sure that the junit-cs211.jar is in the same directory.
