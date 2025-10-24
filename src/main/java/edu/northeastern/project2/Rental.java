@@ -3,59 +3,60 @@ package edu.northeastern.project2;
 import java.time.*;
 
 public class Rental {
-
-    protected Media media;
-    protected Payment payment;
-    protected LocalDate rentDate;
-    protected double fee;
-    protected LocalDate dropoffDate;
+    private Media media;
+    private Payment payment;
+    private LocalDate rentDate;
+    private LocalDate returnDate;
+    private double fee;
 
     public Rental(Media media, Payment payment, LocalDate today, double fee) {
         this.media = media;
         this.payment = payment;
         this.rentDate = today;
         this.fee = fee;
-        this.dropoffDate = null;
+        this.returnDate = null;
     }
 
     public Media getMedia() {
-        return this.media;
+        return media;
     }
 
     public Payment getPayment() {
-        return this.payment;
+        return payment;
     }
 
     public LocalDate getRentDate() {
-        return this.rentDate;
+        return rentDate;
     }
 
     public double getFee() {
-        return this.fee;
+        return fee;
     }
 
     public double dropoff(LocalDate today) {
-        if (this.dropoffDate == null) {
-            this.dropoffDate = today;
+        if (returnDate == null) {
+            returnDate = today;
         }
-        return this.getTotalFee(today);
+        return getTotalFee(today);
     }
 
     public boolean isRented() {
-        return this.dropoffDate == null;
+        return returnDate == null;
     }
 
     public int daysRented(LocalDate today) {
-        LocalDate endDate = this.isRented() ? today : this.dropoffDate;
-        return Period.between(this.rentDate, endDate).getDays();
+        if (returnDate != null) {
+            return Period.between(rentDate, returnDate).getDays();
+        }
+        return Period.between(rentDate, today).getDays();
     }
 
     public double getTotalFee(LocalDate today) {
-        return this.fee;
+        return fee;
     }
 
     @Override
     public String toString() {
-        return this.media.toString() + ", rented on " + this.rentDate.toString() + " using " + this.payment.toString();
+        return media.toString() + ", rented on " + rentDate + " using " + payment.toString();
     }
 }

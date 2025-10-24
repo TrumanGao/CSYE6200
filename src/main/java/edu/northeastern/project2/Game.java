@@ -1,11 +1,10 @@
 package edu.northeastern.project2;
 
 public class Game extends Media {
-
-    protected String platform;
-    protected String rating;
-    protected int discs;
-    protected boolean online;
+    private String platform;
+    private String rating;
+    private int discs;
+    private boolean online;
 
     public Game(String name, int year, String platform, String rating, int discs, boolean online) {
         super(name, year);
@@ -16,24 +15,28 @@ public class Game extends Media {
     }
 
     public String getPlatform() {
-        return this.platform;
+        return platform;
     }
 
     public String getRating() {
-        return this.rating;
+        return rating;
     }
 
     public int getDiscs() {
-        return this.discs;
+        return discs;
     }
 
     public boolean isOnline() {
-        return this.online;
+        return online;
     }
 
     @Override
     public String toString() {
-        String onlineString = this.online ? ", online" : "";
-        return super.toString() + " " + this.platform + " [" + this.rating + ", " + this.discs + " discs" + onlineString + "]";
+        String base = super.toString() + " " + platform + " [" + rating + ", " + discs + " discs";
+        if (online) {
+            base += ", online";
+        }
+        base += "]";
+        return base;
     }
 }

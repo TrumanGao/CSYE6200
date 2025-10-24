@@ -1,7 +1,6 @@
 package edu.northeastern.project2;
 
 public class Payment {
-
     private String cardNo;
     private String name;
     private int expMonth;
@@ -15,23 +14,23 @@ public class Payment {
     }
 
     public String getCardNo() {
-        return this.cardNo;
+        return cardNo;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public int getExpMonth() {
-        return this.expMonth;
+        return expMonth;
     }
 
     public int getExpYear() {
-        return this.expYear;
+        return expYear;
     }
 
     @Override
     public String toString() {
-        return "#" + this.cardNo + " (" + this.name + "), exp " + this.expMonth + "/" + this.expYear;
+        return "#" + cardNo + " (" + name + "), exp " + expMonth + "/" + expYear;
     }
 }

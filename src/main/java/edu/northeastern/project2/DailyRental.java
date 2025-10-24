@@ -3,7 +3,6 @@ package edu.northeastern.project2;
 import java.time.*;
 
 public class DailyRental extends Rental {
-
     private double credit;
 
     public DailyRental(Media media, Payment payment, LocalDate today, double fee, double credit) {
@@ -16,14 +15,16 @@ public class DailyRental extends Rental {
     }
 
     public double getCredit() {
-        return this.credit;
+        return credit;
     }
 
     @Override
     public double getTotalFee(LocalDate today) {
-        int days = this.daysRented(today);
-        int billedDays = Math.max(1, days);
-        double totalFee = (billedDays * this.fee) - this.credit;
-        return Math.max(0.0, totalFee);
+        int days = daysRented(today);
+        if (days < 1) {
+            days = 1;
+        }
+        double total = days * getFee() - credit;
+        return Math.max(0, total);
     }
 }

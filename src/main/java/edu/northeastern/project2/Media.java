@@ -1,10 +1,10 @@
 package edu.northeastern.project2;
 
+import java.time.*;
+
 public class Media {
-
-    protected String name;
-
-    protected int year;
+    private String name;
+    private int year;
 
     public Media(String name, int year) {
         this.name = name;
@@ -12,29 +12,29 @@ public class Media {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public int getYear() {
-        return this.year;
+        return year;
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Media) {
-            Media otherMedia = (Media) other;
-            return this.name.equals(otherMedia.getName()) && this.year == otherMedia.getYear();
+        if (!(other instanceof Media)) {
+            return false;
         }
-        return false;
+        Media m = (Media) other;
+        return this.name.equals(m.name) && this.year == m.year;
     }
 
     @Override
     public int hashCode() {
-        return this.getName().hashCode();
+        return getName().hashCode();
     }
 
     @Override
     public String toString() {
-        return this.name + " (" + this.year + ")";
+        return name + " (" + year + ")";
     }
 }

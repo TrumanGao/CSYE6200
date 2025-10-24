@@ -1,13 +1,12 @@
 package edu.northeastern.project2;
 
 public class Video extends Media {
-
     public static final int DVD = 0;
     public static final int BLURAY = 1;
 
-    protected int runtime;
-    protected String rating;
-    protected int format;
+    private int runtime;
+    private String rating;
+    private int format;
 
     public Video(String name, int year, int runtime, String rating, int format) {
         super(name, year);
@@ -17,20 +16,20 @@ public class Video extends Media {
     }
 
     public int getRuntime() {
-        return this.runtime;
+        return runtime;
     }
 
     public String getRating() {
-        return this.rating;
+        return rating;
     }
 
     public int getFormat() {
-        return this.format;
+        return format;
     }
 
     @Override
     public String toString() {
-        String formatString = (this.format == DVD) ? "DVD" : "BLURAY";
-        return super.toString() + " " + formatString + " [" + this.rating + ", " + this.runtime + " min]";
+        String formatStr = (format == DVD) ? "DVD" : "BLURAY";
+        return super.toString() + " " + formatStr + " [" + rating + ", " + runtime + " min]";
     }
 }

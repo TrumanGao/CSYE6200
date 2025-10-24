@@ -1,13 +1,12 @@
 package edu.northeastern.project2;
 
-import java.time.LocalDate;
+import java.time.*;
 
 public class RentalBox {
-
-    private Media[] mediaSlots;
+    private Media[] inventory;
 
     public RentalBox(int capacity) {
-        this.mediaSlots = new Media[capacity];
+        inventory = new Media[capacity];
     }
 
     public RentalBox() {
@@ -15,19 +14,16 @@ public class RentalBox {
     }
 
     public int boxCapacity() {
-        return this.mediaSlots.length;
+        return inventory.length;
     }
 
     public Media get(int i) {
-        if (i >= 0 && i < this.boxCapacity()) {
-            return this.mediaSlots[i];
-        }
-        return null;
+        return inventory[i];
     }
 
     public boolean inStock(Media m) {
-        for (Media slot : this.mediaSlots) {
-            if (slot != null && slot.equals(m)) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null && inventory[i].equals(m)) {
                 return true;
             }
         }
@@ -35,9 +31,9 @@ public class RentalBox {
     }
 
     public boolean put(Media m) {
-        for (int i = 0; i < this.boxCapacity(); i++) {
-            if (this.mediaSlots[i] == null) {
-                this.mediaSlots[i] = m;
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] == null) {
+                inventory[i] = m;
                 return true;
             }
         }
@@ -45,13 +41,12 @@ public class RentalBox {
     }
 
     public Rental rent(Media m, Payment p, LocalDate d) {
-        for (int i = 0; i < this.boxCapacity(); i++) {
-            Media mediaToRent = this.mediaSlots[i];
-            if (mediaToRent != null && mediaToRent.equals(m)) {
-                this.mediaSlots[i] = null;
-                double fee = this.getDailyFee(mediaToRent);
-                Rental rental = new DailyRental(mediaToRent, p, d, fee);
-                return rental;
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null && inventory[i].equals(m)) {
+                Media foundMedia = inventory[i];
+                inventory[i] = null;
+                double dailyFee = getDailyFee(foundMedia);
+                return new DailyRental(foundMedia, p, d, dailyFee);
             }
         }
         return null;
@@ -61,18 +56,21 @@ public class RentalBox {
         System.out.printf("$%.2f paid by %s\n", amount, p.toString());
     }
 
+
     public boolean dropoff(Rental r, LocalDate today) {
         if (!r.isRented()) {
             return false;
         }
-        boolean putSuccess = this.put(r.getMedia());
-        if (putSuccess) {
-            double totalFee = r.dropoff(today);
-            this.processPayment(r.getPayment(), totalFee);
-            return true;
-        } else {
-            return false;
+
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] == null) {
+                inventory[i] = r.getMedia();
+                double totalFee = r.dropoff(today);
+                processPayment(r.getPayment(), totalFee);
+                return true;
+            }
         }
+        return false;
     }
 
     public double getDailyFee(Media m) {
@@ -86,21 +84,17 @@ public class RentalBox {
         } else if (m instanceof Game) {
             return 3.00;
         }
-
         return 0.00;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Media slot : this.mediaSlots) {
-            if (slot != null) {
-                sb.append(slot.toString());
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
+                sb.append(inventory[i].toString());
                 sb.append("\n");
             }
-        }
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
         }
         return sb.toString();
     }
