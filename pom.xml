@@ -5,19 +5,16 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 项目坐标 -->
     <groupId>edu.northeastern</groupId>
     <artifactId>CSYE6200</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <!-- 项目信息 -->
     <name>CSYE 6200</name>
     <description>CSYE practicing</description>
 
-    <!-- 属性配置 -->
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>  <!-- Java 版本 -->
+        <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -43,9 +40,6 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
-                    <includes>
-                        <include>**/*Tester.java</include>
-                    </includes>
                 </configuration>
             </plugin>
         </plugins>

@@ -19,17 +19,13 @@ out/
 .settings/
 bin/
 
-# 编译输出
 *.class
 
-# 日志
 *.log
 
-# 操作系统
 .DS_Store
 Thumbs.db
 *~
 
-# 其他
 *.swp
 *.swo
