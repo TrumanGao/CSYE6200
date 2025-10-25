@@ -1,6 +1,4 @@
-package edu.northeastern.project2;
-
-import java.time.*;
+package edu.northeastern.csye6200.project2;
 
 public class Media {
     private String name;

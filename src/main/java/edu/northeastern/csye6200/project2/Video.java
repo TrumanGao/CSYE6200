@@ -1,4 +1,4 @@
-package edu.northeastern.project2;
+package edu.northeastern.csye6200.project2;
 
 public class Video extends Media {
     public static final int DVD = 0;
